@@ -21,4 +21,12 @@ curl -fsSL "$site/install/apiary" | bash >/dev/null
 "$apiary" config no-proxy api.sprites.dev >/dev/null
 
 "$apiary" enrol --name "$device"
-"$apiary" doctor
+# doctor's report names the Apiary member and its accounts: print it only when it fails.
+report="$(mktemp)"
+if "$apiary" doctor >"$report" 2>&1; then
+  echo "apiary doctor: ok"
+  rm -f "$report"
+else
+  cat "$report"; rm -f "$report"
+  exit 1
+fi

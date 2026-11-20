@@ -41,7 +41,7 @@ device's token instead. Don't combine this profile with `anthropic` or `anthropi
 - `profile.toml`: the network rules (`apiary.wtf`, `switch.apiary.wtf`), `checkpoint = false`
   and a 12-minute setup window.
 - `setup.sh`: installs the Apiary client, runs `apiary setup`, keeps the gateway direct,
-  enrols the Sprite, and runs `apiary doctor`.
+  enrols the Sprite, and runs `apiary doctor`, printing its report only when it fails.
 
 Versions are tags: `v1.0.0` is what `@antialias/apiary@1` picks.
 
