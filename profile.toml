@@ -1,0 +1,24 @@
+format      = 2
+name        = "apiary"
+summary     = "Claude Code through Apiary's switch proxy, as an Apiary device of its own"
+description = """
+Routes Claude Code in the Sprite through an Apiary switch proxy (switch.apiary.wtf), the \
+way Apiary's client does on a laptop: Claude Code's requests to Anthropic go through the \
+proxy, which serves them from your Apiary's accounts and model classes. No Anthropic key \
+or claude.ai sign-in is in the Sprite. At launch the Sprite enrols as its own device: the \
+launch prints a code, and you approve it at apiary.wtf/devices. What it costs: the \
+device's token, which lasts 24 hours and renews itself, lives in the Sprite, so the \
+profile is applied after the checkpoint and never saved in one; revoke the device at \
+apiary.wtf/devices to cut it off. Claude Code's own requests (not its Bash tool's) leave \
+through the proxy, so the Sprite's network rules don't cover them. Fly's connector \
+gateway stays direct, so other profiles' connectors still work. Don't combine it with \
+anthropic or anthropic-key."""
+checkpoint  = false
+timeout     = "12m"   # the sign-in code is good for 10 minutes
+
+[policy]
+rules = [
+  { include = "defaults" },
+  { action = "allow", domain = "apiary.wtf" },          # the client and its CA certificate
+  { action = "allow", domain = "switch.apiary.wtf" },   # the proxy, and device sign-in
+]
